@@ -6,7 +6,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const rand = a => a[Math.floor(Math.random() * a.length)];
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const stage = $('#stage');
-const STATYOU = 'https://statyou.kr/ko/student-login';
+
 const KEY = 'ecoRescue_v1';
 const ICON_ON = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b4636" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#ffd25a"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>';
 const ICON_OFF = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b4636" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#e6d9b5"/><path d="M17 9l5 6M22 9l-5 6"/></svg>';
@@ -651,11 +651,9 @@ async function certificate() {
   const fname = `생태계구조대_임명장_${S.num || ''}${S.name}.png`;
   const d = scene(`<div class="card"><div class="title-tag coral">임명장 발급</div><h2 class="q" style="text-align:center">${S.name} 대원의 생태계 구조대 임명장</h2>
     <img id="certImg" src="${url}" alt="임명장">
-    <div class="next-row" style="justify-content:center"><button class="btn sun big" id="dl">임명장 저장하기</button><a class="btn coral big" id="up" href="${STATYOU}" target="_blank" rel="noopener" style="text-decoration:none">상태창에 올리기 ↗</a></div>
-    <div class="steps"><div class="step"><b>1. 저장하기</b>[임명장 저장하기]를 눌러요. 저장이 안 되면 임명장 그림을 꾹 눌러 "이미지 저장"을 해요.</div>
-    <div class="step"><b>2. 상태창 접속</b>[상태창에 올리기]를 눌러 로그인해요. (학생 코드 + 2차 PIN)</div>
-    <div class="step"><b>3. 제출 미션</b>"생태계 구조대 임명장 인증하기" 미션에 임명장 사진과 나의 약속 한 줄을 올려요!</div></div></div>
-    <div class="next-row">${btn('다 올렸어요 ▶')}</div>`);
+    <div class="next-row" style="justify-content:center"><button class="btn sun big" id="dl">임명장 저장하기</button></div>
+    <div class="steps"><div class="step"><b>임명장 저장하기</b>[임명장 저장하기]를 눌러요. 저장이 안 되면 임명장 그림을 꾹 눌러 "이미지 저장"을 해요.</div></div></div>
+    <div class="next-row">${btn('다 했어요 ▶')}</div>`);
   sfx('stamp'); confetti(220);
   $('#dl', d).onclick = async () => {
     sfx('click');
@@ -666,7 +664,7 @@ async function certificate() {
       toast('임명장을 저장했어요!');
     } catch (e) { toast('그림을 꾹 눌러 저장해 주세요'); }
   };
-  $('#up', d).onclick = () => sfx('click');
+  
   S.done = true; S.ckpt = 4; save();
   await waitClick($('.next-row:last-child .btn', d));
 }
